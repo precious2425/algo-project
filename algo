@@ -1,0 +1,39 @@
+ALGORITHM CountSentence
+VAR
+    sentence : STRING
+    c : CHARACTER
+    length, wordCount, vowelCount, i : INTEGER
+
+BEGIN
+    length := 0
+    wordCount := 1
+    vowelCount := 0
+    i := 1
+
+    Write("Enter a sentence ending with a point:")
+    Read(sentence)
+
+    c := sentence[i]
+
+    WHILE (c <> ".") DO
+        length := length + 1
+
+        IF (c = " ") THEN
+            wordCount := wordCount + 1
+        END_IF
+
+        IF (c = "a" OR c = "e" OR c = "i" OR c = "o" OR c = "u") THEN
+            vowelCount := vowelCount + 1
+        END_IF
+
+        i := i + 1
+        c := sentence[i]
+    END_WHILE
+
+    length := length + 1   // counting the point itself
+
+    Write("Length of sentence: ", length)
+    Write("Number of words: ", wordCount)
+    Write("Number of vowels: ", vowelCount)
+
+END
