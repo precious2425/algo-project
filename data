@@ -1,0 +1,108 @@
+Algorithm sum_distinct
+Var
+    set1, set2 : array[1..n] of integer
+    i, j : integer
+    sum : integer
+    found : boolean
+
+Begin
+    sum ← 0
+
+    // Check set1 elements not in set2
+    For i ← 1 to length(set1) do
+        found ← false
+        For j ← 1 to length(set2) do
+            If set1[i] = set2[j] then
+                found ← true
+        If found = false then
+            sum ← sum + set1[i]
+
+    // Check set2 elements not in set1
+    For i ← 1 to length(set2) do
+        found ← false
+        For j ← 1 to length(set1) do
+            If set2[i] = set1[j] then
+                found ← true
+        If found = false then
+            sum ← sum + set2[i]
+
+    Write("Sum of distinct elements: ", sum)
+End
+
+
+PROMBLEM 2 SOLUTION
+
+// Part 1: Procedure
+Procedure dot_product(v1, v2 : array[1..n] of real; VAR ps : real; n : integer)
+Var i : integer
+Begin
+    ps ← 0
+    For i ← 1 to n do
+        ps ← ps + v1[i] * v2[i]
+End
+
+
+// Part 2: Algorithm checking orthogonality using the procedure above
+Algorithm check_orthogonal_pairs
+Var
+    v1, v2 : array[1..n] of real
+    ps : real
+    i, k, n, k_pairs : integer
+
+Begin
+    Write("Enter number of pairs: ")
+    Read(k_pairs)
+
+    For k ← 1 to k_pairs do
+        Write("Enter size of vectors: ")
+        Read(n)
+        For i ← 1 to n do
+            Read(v1[i])
+        For i ← 1 to n do
+            Read(v2[i])
+
+        dot_product(v1, v2, ps, n)
+
+        If ps = 0 then
+            Write("Pair ", k, ": Orthogonal")
+        Else
+            Write("Pair ", k, ": Not orthogonal")
+End
+
+
+// Part 3: Modified version using a function instead of a procedure
+Function dot_product(v1, v2 : array[1..n] of real; n : integer) : real
+Var i : integer
+    ps : real
+Begin
+    ps ← 0
+    For i ← 1 to n do
+        ps ← ps + v1[i] * v2[i]
+    dot_product ← ps
+End
+
+Algorithm check_orthogonal_pairs_v2
+Var
+    v1, v2 : array[1..n] of real
+    i, k, n, k_pairs : integer
+
+Begin
+    Write("Enter number of pairs: ")
+    Read(k_pairs)
+
+    For k ← 1 to k_pairs do
+        Write("Enter size of vectors: ")
+        Read(n)
+        For i ← 1 to n do
+            Read(v1[i])
+        For i ← 1 to n do
+            Read(v2[i])
+
+        If dot_product(v1, v2, n) = 0 then
+            Write("Pair ", k, ": Orthogonal")
+        Else
+            Write("Pair ", k, ": Not orthogonal")
+End
+
+
+
